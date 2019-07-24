@@ -1,0 +1,1249 @@
+
+
+SQL> CREATE TABLE STUDENT1(stuId NUMBER PRIMARY KEY,stuName VARCHAR(20),marks NU
+MBER,deptId NUMBER references DEPARTMENT(deptId));
+
+Table created.
+
+SQL> INSERT INTO STUDENT1 VALUES(15,'RAM',84,20);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT1 VALUES(16,'Raj',80,30);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT1 VALUES(17,'Hema',80,30);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT1 VALUES(18,'Priya',81,40);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT1 VALUES(19,'Pooja',83,40);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from STUDENT1;
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+        16 Raj                          80         30
+        17 Hema                         80         30
+        18 Priya                        81         40
+        19 Pooja                        83         40
+
+SQL> INSERT INTO STUDENT1 VALUES(11,'aMIT',78,10);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT1 VALUES(12,'Sumit',60,10);
+
+1 row created.
+
+SQL> select COUNT(*) from STUDENT1 GROUP BY deptId;
+
+  COUNT(*)
+----------
+         2
+         1
+         2
+         2
+
+SQL> select deptId,COUNT(*) from STUDENT1 GROUP BY deptId;
+
+    DEPTID   COUNT(*)
+---------- ----------
+        30          2
+        20          1
+        40          2
+        10          2
+
+SQL> select deptId,AVG(marks) from STUDENT1 GROUP BY deptId;
+
+    DEPTID AVG(MARKS)
+---------- ----------
+        30         80
+        20         84
+        40         82
+        10         69
+
+SQL> select deptId,SUM(marks) from STUDENT1 GROUP BY deptId;
+
+    DEPTID SUM(MARKS)
+---------- ----------
+        30        160
+        20         84
+        40        164
+        10        138
+
+SQL> INSERT INTO STUDENT1 VALUES(13,'ABHI',65,20);
+
+1 row created.
+
+SQL> select deptId,SUM(marks) from STUDENT1 GROUP BY deptId;
+
+    DEPTID SUM(MARKS)
+---------- ----------
+        30        160
+        20        149
+        40        164
+        10        138
+
+SQL> select deptId,MIN(marks) from STUDENT1 GROUP BY deptId;
+
+    DEPTID MIN(MARKS)
+---------- ----------
+        30         80
+        20         65
+        40         81
+        10         60
+
+SQL> select deptId,MAX(marks) from STUDENT1 GROUP BY deptId;
+
+    DEPTID MAX(MARKS)
+---------- ----------
+        30         80
+        20         84
+        40         83
+        10         78
+
+SQL> SELECT deptId,COUNT(*) from STUDENT1 GROUP BY deptId HAVING MIN(marks)>70;
+
+    DEPTID   COUNT(*)
+---------- ----------
+        30          2
+        40          2
+
+SQL> trunc(125,815);
+SP2-0734: unknown command beginning "trunc(125,..." - rest of line ignored.
+SQL> trunc(125.815);
+SP2-0734: unknown command beginning "trunc(125...." - rest of line ignored.
+SQL> trunc(125.815,1);
+SP2-0734: unknown command beginning "trunc(125...." - rest of line ignored.
+SQL> select trunc(125.815,1);
+select trunc(125.815,1)
+                      *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select trunc(125.815,1) from dual;
+
+TRUNC(125.815,1)
+----------------
+           125.8
+
+SQL> select trunc(125.815,-3) from dual;
+
+TRUNC(125.815,-3)
+-----------------
+                0
+
+SQL> select trunc(125.815,2) from dual;
+
+TRUNC(125.815,2)
+----------------
+          125.81
+
+SQL> select trunc(125.815,-2) from dual;
+
+TRUNC(125.815,-2)
+-----------------
+              100
+
+SQL> select lower(ABc) from dual;
+select lower(ABc) from dual
+             *
+ERROR at line 1:
+ORA-00904: "ABC": invalid identifier
+
+
+SQL> select lower(ABC) from dual;
+select lower(ABC) from dual
+             *
+ERROR at line 1:
+ORA-00904: "ABC": invalid identifier
+
+
+SQL> select LOWER(ABC) from dual;
+select LOWER(ABC) from dual
+             *
+ERROR at line 1:
+ORA-00904: "ABC": invalid identifier
+
+
+SQL> select LOWER('ABC') from dual;
+
+LOW
+---
+abc
+
+SQL> select LOWER('ABc') from dual;
+
+LOW
+---
+abc
+
+SQL> select UPPER('ABc') from dual;
+
+UPP
+---
+ABC
+
+SQL> select LPAD('ABc',2,B) from dual;
+select LPAD('ABc',2,B) from dual
+                    *
+ERROR at line 1:
+ORA-00904: "B": invalid identifier
+
+
+SQL> select LPAD('ABc',2,'B') from dual;
+
+LP
+--
+AB
+
+SQL> select LPAD('ABcDeFg',2,'D') from dual;
+
+LP
+--
+AB
+
+SQL> select LPAD('ABcDeFg',5,'D') from dual;
+
+LPAD(
+-----
+ABcDe
+
+SQL> select RPAD('ABcDeFg',5,'D') from dual;
+
+RPAD(
+-----
+ABcDe
+
+SQL> select RPAD('ABcDeFg',5,'c') from dual;
+
+RPAD(
+-----
+ABcDe
+
+SQL> select LPAD('ABcDeFg',5,'c') from dual;
+
+LPAD(
+-----
+ABcDe
+
+SQL> select REPLACE('ABcDeFg',Bc,'cB') from dual;
+select REPLACE('ABcDeFg',Bc,'cB') from dual
+                         *
+ERROR at line 1:
+ORA-00904: "BC": invalid identifier
+
+
+SQL> select REPLACE('ABcDeFg','Bc','cB') from dual;
+
+REPLACE
+-------
+AcBDeFg
+
+SQL> select REPLACE('ABcDeFgB','B','c') from dual;
+
+REPLACE(
+--------
+AccDeFgc
+
+SQL> select Current_Date() from dual;
+select Current_Date() from dual
+                   *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select SysDate() from dual;
+select SysDate() from dual
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select SysDate from dual;
+
+SYSDATE
+---------
+23-JUL-19
+
+SQL> select Current_Date from dual;
+
+CURRENT_D
+---------
+23-JUL-19
+
+SQL> select Current_Date fROm dual;
+
+CURRENT_D
+---------
+23-JUL-19
+
+SQL> select Last_day('19-Feb-18') fROm dual;
+
+LAST_DAY(
+---------
+28-FEB-18
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=========================================================
+
+
+
+     STUID STUNAME              DEPTNAME
+---------- -------------------- --------------------
+        12 Sumit                Electronics
+        11 Amit                 Electronics
+        13 Kanu                 Computer
+        15 RAM                  Computer
+        16 Raj                  Mechanical
+        17 Hema                 Mechanical
+        19 Pooja                Civil
+        18 Priya                Civil
+
+8 rows selected.
+
+SQL> INSERT INTO DEPARTMENT VALUES(50,"Electrical");
+INSERT INTO DEPARTMENT VALUES(50,"Electrical")
+                                 *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> INSERT INTO DEPARTMENT VALUES(50,'Electrical');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(60,'Production');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from department;
+
+    DEPTID DEPTNAME
+---------- --------------------
+        10 Electronics
+        20 Computer
+        30 Mechanical
+        40 Civil
+        50 Electrical
+        60 Production
+
+6 rows selected.
+
+SQL> select stuid,stuname,deptname from student s,department d where s.deptid=d.
+deptid;
+select stuid,stuname,deptname from student s,department d where s.deptid=d.depti
+d
+                                                                *
+ERROR at line 1:
+ORA-00904: "S"."DEPTID": invalid identifier
+
+
+SQL> select stuid,stuname,deptname from student1 s,department d where s.deptid=d
+.deptid;
+
+     STUID STUNAME              DEPTNAME
+---------- -------------------- --------------------
+        12 Sumit                Electronics
+        11 Amit                 Electronics
+        13 Kanu                 Computer
+        15 RAM                  Computer
+        16 Raj                  Mechanical
+        17 Hema                 Mechanical
+        19 Pooja                Civil
+        18 Priya                Civil
+
+8 rows selected.
+
+SQL> select stuid,stuname,deptname from student1 s,department d where s.deptid I
+N(30,40);
+
+     STUID STUNAME              DEPTNAME
+---------- -------------------- --------------------
+        16 Raj                  Electronics
+        16 Raj                  Computer
+        16 Raj                  Mechanical
+        16 Raj                  Civil
+        16 Raj                  Electrical
+        16 Raj                  Production
+        17 Hema                 Electronics
+        17 Hema                 Computer
+        17 Hema                 Mechanical
+        17 Hema                 Civil
+        17 Hema                 Electrical
+
+     STUID STUNAME              DEPTNAME
+---------- -------------------- --------------------
+        17 Hema                 Production
+        18 Priya                Electronics
+        18 Priya                Computer
+        18 Priya                Mechanical
+        18 Priya                Civil
+        18 Priya                Electrical
+        18 Priya                Production
+        19 Pooja                Electronics
+        19 Pooja                Computer
+        19 Pooja                Mechanical
+        19 Pooja                Civil
+
+     STUID STUNAME              DEPTNAME
+---------- -------------------- --------------------
+        19 Pooja                Electrical
+        19 Pooja                Production
+
+24 rows selected.
+
+SQL> select s.studid,s.stuname,d.deptid,d.deptname from student1 s,department d
+where s.deptid(+)=d.deptid;
+select s.studid,s.stuname,d.deptid,d.deptname from student1 s,department d where
+ s.deptid(+)=d.deptid
+       *
+ERROR at line 1:
+ORA-00904: "S"."STUDID": invalid identifier
+
+
+SQL> select s.stuid,s.stuname,d.deptid,d.deptname from student1 s,department d w
+here s.deptid(+)=d.deptid;
+
+     STUID STUNAME                  DEPTID DEPTNAME
+---------- -------------------- ---------- --------------------
+        12 Sumit                        10 Electronics
+        11 Amit                         10 Electronics
+        13 Kanu                         20 Computer
+        15 RAM                          20 Computer
+        16 Raj                          30 Mechanical
+        17 Hema                         30 Mechanical
+        19 Pooja                        40 Civil
+        18 Priya                        40 Civil
+                                        50 Electrical
+                                        60 Production
+
+10 rows selected.
+
+SQL> select s.stuid,s.stuname,d.deptid,d.deptname from student1 s,department d w
+here s.deptid=d.deptid(+);
+
+     STUID STUNAME                  DEPTID DEPTNAME
+---------- -------------------- ---------- --------------------
+        12 Sumit                        10 Electronics
+        11 Amit                         10 Electronics
+        13 Kanu                         20 Computer
+        15 RAM                          20 Computer
+        17 Hema                         30 Mechanical
+        16 Raj                          30 Mechanical
+        19 Pooja                        40 Civil
+        18 Priya                        40 Civil
+
+8 rows selected.
+
+SQL> select s.stuid,s.stuname,d.deptid,d.deptname from student1 s,department d w
+here s.deptid(+)=d.deptid(+);
+select s.stuid,s.stuname,d.deptid,d.deptname from student1 s,department d where
+s.deptid(+)=d.deptid(+)
+
+           *
+ERROR at line 1:
+ORA-01468: a predicate may reference only one outer-joined table
+
+
+SQL> create table employee(empid NUMBER PRIMARY KEY,mgrid NUMBER,empname VARCHAR
+(20));
+create table employee(empid NUMBER PRIMARY KEY,mgrid NUMBER,empname VARCHAR(20))
+
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table employee1(empid NUMBER PRIMARY KEY,mgrid NUMBER,empname VARCHA
+R(20));
+
+Table created.
+
+SQL> insert into employee1 values(101,105,"Rita");
+insert into employee1 values(101,105,"Rita")
+                                     *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into employee1 values(101,105,'Rita');
+
+1 row created.
+
+SQL> insert into employee1 values(102,105,'Sima');
+
+1 row created.
+
+SQL> insert into employee1 values(103,104,'Priya');
+
+1 row created.
+
+SQL> insert into employee1 values(104,105,'Gita');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from employee1;
+
+     EMPID      MGRID EMPNAME
+---------- ---------- --------------------
+       101        105 Rita
+       102        105 Sima
+       103        104 Priya
+       104        105 Gita
+
+SQL> select e1.empid,e1.empname,e2.mgrid from employee1 e1,employee1 e2
+  2  where e1.empid=e2.mgrid;
+
+     EMPID EMPNAME                   MGRID
+---------- -------------------- ----------
+       104 Gita                        104
+
+SQL> insert into employee1 values(105,106,'Ram');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select e1.empid,e1.empname,e2.mgrid from employee1 e1,employee1 e2
+  2  where e1.empid=e2.mgrid;
+
+     EMPID EMPNAME                   MGRID
+---------- -------------------- ----------
+       105 Ram                         105
+       105 Ram                         105
+       104 Gita                        104
+       105 Ram                         105
+
+SQL> select deptid from department where deptname='computer';
+
+no rows selected
+
+SQL> select deptid from department where deptname='Computer';
+
+    DEPTID
+----------
+        20
+
+SQL> select * from student1 where deptid=20;
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+        13 Kanu                         80         20
+
+SQL> select * from student1 s where s.deptid=(select deptid from department wher
+e deptname='Computer');
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+        13 Kanu                         80         20
+
+SQL> select * from student1 s where s.marks > (select MIN(s.marks) from student1
+ s,department d where d.deptid=40 );
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+        16 Raj                          80         30
+        17 Hema                         80         30
+        18 Priya                        81         40
+        19 Pooja                        83         40
+        12 Sumit                        75         10
+        13 Kanu                         80         20
+
+7 rows selected.
+
+SQL> select * from student1  where marks > (select MIN(marks) from student1 wher
+e deptid=40 );
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+        19 Pooja                        83         40
+
+SQL> select * from student1  where marks > ANY(select marks from student1 where
+deptid=40 );
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+        19 Pooja                        83         40
+
+SQL> select * from student1  where marks > ALL(select marks from student1 where
+deptid=40 );
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+
+SQL>
+
+
+
+
+----------------------------------------------------------
+SQL> select * from sampledata;
+
+       EID ENAME                      ESAL BDATE
+---------- -------------------- ---------- ---------
+       101 Akshata                   20000 18-FEB-82
+       102 Soumya                    30000 18-MAR-85
+       103 Dinesh                    25000 12-SEP-83
+           nitin                     25000 12-SEP-83
+
+SQL> INSERT INTO SAMPLEDATA(ename,esal,bdate) VALUES('sataym',25000,'12-Sep-1983
+');
+
+1 row created.
+
+SQL> alter table sampledata DROP constraint uid_pk;
+alter table sampledata DROP constraint uid_pk
+                                       *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint
+
+
+SQL> alter table sampledata DROP constraint uid_uk;
+
+Table altered.
+
+SQL> alter table sampledata ADD deptid NUMBER;
+
+Table altered.
+
+SQL> desc sampledata;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ EID                                                NUMBER
+ ENAME                                              VARCHAR2(20)
+ ESAL                                               NUMBER
+ BDATE                                              DATE
+ DEPTID                                             NUMBER
+
+SQL> alter table sampledata drop column deptid;
+
+Table altered.
+
+SQL> desc sampledata;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ EID                                                NUMBER
+ ENAME                                              VARCHAR2(20)
+ ESAL                                               NUMBER
+ BDATE                                              DATE
+
+SQL> alter table sampledata ADD deptid NUMBER;
+
+Table altered.
+
+SQL> alter table sampledata ADD CONSTRAINT deptid_fk FOREIGN KEY(deptid) REFEREN
+CES department(deptid);
+
+Table altered.
+
+SQL> INSERT INTO SAMPLEDATA VALUES(107,'Shilpa',30000,'12-Mar-1978');
+INSERT INTO SAMPLEDATA VALUES(107,'Shilpa',30000,'12-Mar-1978')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> INSERT INTO SAMPLEDATA VALUES(107,'Shilpa',30000,'12-Mar-1978',40);
+
+1 row created.
+
+SQL> INSERT INTO SAMPLEDATA VALUES(107,'Shilpa',30000,'12-Mar-1978',80);
+INSERT INTO SAMPLEDATA VALUES(107,'Shilpa',30000,'12-Mar-1978',80)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (LAB2ETRG30.DEPTID_FK) violated - parent key
+not found
+
+
+SQL> alter table sampledata modify ename VARCHAR(40);
+
+Table altered.
+
+SQL> desc sampledata;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ EID                                                NUMBER
+ ENAME                                              VARCHAR2(40)
+ ESAL                                               NUMBER
+ BDATE                                              DATE
+ DEPTID                                             NUMBER
+
+SQL> alter table sampledata add constarint esal_ck CHECK (esal>20000);
+alter table sampledata add constarint esal_ck CHECK (esal>20000)
+                                                               *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> alter table sampledata add constarint esal_ck CHECK (esal>=20000);
+alter table sampledata add constarint esal_ck CHECK (esal>=20000)
+                                                                *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> alter table sampledata ADD CONSTRAINT esal_ck CHECK (esal>=20000);
+
+Table altered.
+
+SQL> alter table sampledata ADD CONSTRAINT esal_ck CHECK (esal<20000);
+alter table sampledata ADD CONSTRAINT esal_ck CHECK (esal<20000)
+                                      *
+ERROR at line 1:
+ORA-02264: name already used by an existing constraint
+
+
+SQL> alter table sampledata ADD CONSTRAINT esal1_ck CHECK (esal<20000);
+alter table sampledata ADD CONSTRAINT esal1_ck CHECK (esal<20000)
+                                      *
+ERROR at line 1:
+ORA-02293: cannot validate (LAB2ETRG30.ESAL1_CK) - check constraint violated
+
+
+SQL> drop table sampledata;
+
+Table dropped.
+
+SQL> select * from sampledata;
+select * from sampledata
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> desc sampledata;
+ERROR:
+ORA-04043: object sampledata does not exist
+
+
+SQL> CREATE VIEW stu_view as select stuid,stuname from student1 where deptid=30;
+
+
+View created.
+
+SQL> select * frpm stu_view;
+select * frpm stu_view
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select * from stu_view;
+
+     STUID STUNAME
+---------- --------------------
+        16 Raj
+        17 Hema
+
+SQL> insert into stu_view values(20,'honeysingh');
+
+1 row created.
+
+SQL> select * from stu_view;
+
+     STUID STUNAME
+---------- --------------------
+        16 Raj
+        17 Hema
+
+SQL> insert into stu_view(stuid,stuname) values(21,'honey');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from stu_view;
+
+     STUID STUNAME
+---------- --------------------
+        16 Raj
+        17 Hema
+
+SQL> select * from student1;
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+        16 Raj                          80         30
+        17 Hema                         80         30
+        18 Priya                        81         40
+        19 Pooja                        83         40
+        11 Amit                         65         10
+        12 Sumit                        75         10
+        13 Kanu                         80         20
+        20 honeysingh
+        21 honey
+
+10 rows selected.
+
+SQL> CREATE SEQUENCE eid_seq
+  2  START WITH 1000
+  3  MAXVALUE 10000
+  4  INCREMENT BY 1
+  5  NOCYCLE;
+
+Sequence created.
+
+SQL> SELECT eid_seq.CURRVAL from dual;
+SELECT eid_seq.CURRVAL from dual
+       *
+ERROR at line 1:
+ORA-08002: sequence EID_SEQ.CURRVAL is not yet defined in this session
+
+
+SQL> SELECT eid_seq.NEXTVAL from dual;
+
+   NEXTVAL
+----------
+      1000
+
+SQL> SELECT eid_seq.CURRVAL from dual;
+
+   CURRVAL
+----------
+      1000
+
+SQL> SELECT eid_seq.NEXTVAL from dual;
+
+   NEXTVAL
+----------
+      1001
+
+SQL> SELECT eid_seq.CURRVAL from dual;
+
+   CURRVAL
+----------
+      1001
+
+SQL> INSERT INTO STUDENT1 VALUES(eid_seq.NEXTVAL,'RIMA',90,30);
+
+1 row created.
+
+SQL> select * from student1;
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        15 RAM                          84         20
+        16 Raj                          80         30
+        17 Hema                         80         30
+        18 Priya                        81         40
+        19 Pooja                        83         40
+        11 Amit                         65         10
+        12 Sumit                        75         10
+        13 Kanu                         80         20
+        20 honeysingh
+        21 honey
+      1002 RIMA                         90         30
+
+11 rows selected.
+
+SQL> drop sequence eid_seq;
+
+Sequence dropped.
+
+SQL> create table sampledata(eid NUMBER,ename VARCHAR(20),esal NUMBER ,bdate DAT
+E);
+
+Table created.
+
+SQL> insert into sampledata(eid,ename) values(122,'priya');
+
+1 row created.
+
+SQL> insert into sampledata values(&eid,&ename,&esal,&bdate);
+Enter value for eid: 120
+Enter value for ename: 'pooja'
+Enter value for esal: 20000
+Enter value for bdate: '12-Jan-1984'
+old   1: insert into sampledata values(&eid,&ename,&esal,&bdate)
+new   1: insert into sampledata values(120,'pooja',20000,'12-Jan-1984')
+
+1 row created.
+
+SQL> select * from sampledata;
+
+       EID ENAME                      ESAL BDATE
+---------- -------------------- ---------- ---------
+       122 priya
+       120 pooja                     20000 12-JAN-84
+
+SQL> delete from sampledata where eid=120;
+
+1 row deleted.
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------
+
+
+
+
+delete * from sampledata
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> delete from sampledata;
+
+1 row deleted.
+
+SQL> select * from sampledata;
+
+no rows selected
+
+SQL> desc sampledata;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ EID                                                NUMBER
+ ENAME                                              VARCHAR2(20)
+ ESAL                                               NUMBER
+ BDATE                                              DATE
+
+SQL> CREATE TABLE DEPT(DEPTID NUMBER,deptname VARCHAR(20));
+
+Table created.
+
+SQL> INSERT INTO dept values(10,'IT');
+
+1 row created.
+
+SQL> INSERT INTO dept values(11,'COMP');
+
+1 row created.
+
+SQL> alter table dept ADD CONSTRAINT deptid_pk PRIMARY KEY(deptid);
+
+Table altered.
+
+SQL> CREATE TABLE TRAINEE(tid NUMBER,tname VARCHR(20),deptid NUMBER);
+CREATE TABLE TRAINEE(tid NUMBER,tname VARCHR(20),deptid NUMBER)
+                                            *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> CREATE TABLE TRAINEE(tid NUMBER,tname VARCHAR(20),deptid NUMBER);
+
+Table created.
+
+SQL> UPDATE STUDENT1 SET marks=87 where stuid=11;
+
+1 row updated.
+
+SQL> select * from student1 where stuid=11;
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        11 Amit                         87         10
+
+SQL> UPDATE STUDENT1 SET marks=87,sname='Rohan' where stuid=11;
+UPDATE STUDENT1 SET marks=87,sname='Rohan' where stuid=11
+                             *
+ERROR at line 1:
+ORA-00904: "SNAME": invalid identifier
+
+
+SQL> UPDATE STUDENT1 SET marks=87,stuname='Rohan' where stuid=11;
+
+1 row updated.
+
+SQL> select * from student1 where stuid=11;
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        11 Rohan                        87         10
+
+SQL> UPDATE STUDENT1 SET marks=90 where stuid=11 AND stuname='Rohan';
+
+1 row updated.
+
+SQL> select * from student1 where stuid=11;
+
+     STUID STUNAME                   MARKS     DEPTID
+---------- -------------------- ---------- ----------
+        11 Rohan                        90         10
+
+SQL> select table_name from user_tables;
+
+TABLE_NAME
+------------------------------
+ADDRESS
+ADDRESS_ZS
+ALBUM_INFO
+AUTHOR
+AUTHOR_ZS
+BANKJPA
+BOOK
+BOOKINGDETAILS
+BOOKS
+BOOK_MASTER
+BOOK_TRANSACTIONS
+
+TABLE_NAME
+------------------------------
+CAMPUS
+CATEGORY
+CG_USERDETAILS
+CG_USERS
+COURSE
+CUSTOMER
+CUST_ZS
+DEPARTMENT
+DEPARTMENT_MASTER
+DEPT
+DEPT_MASTER
+
+TABLE_NAME
+------------------------------
+DEPT_ZS
+DESIGINATION_MASTERS
+DESIGNATION_MASTER
+EMP
+EMPLOYEE
+EMPLOYEE1
+EMP_INSURANCE
+EMP_MASTER
+EMP_ZS
+FILETABLE
+FLIGHT_INFO
+
+TABLE_NAME
+------------------------------
+FOODITEMS
+HOTELDETAILS
+JEEEMP
+LOG
+LOGIN
+MEMBERS
+MOVIE_INFO
+ORDERLINE
+ORDERS
+ORDER_MASTER
+ORDER_MS
+
+TABLE_NAME
+------------------------------
+POSITION
+PRICES
+PRODUCTS_1258
+PRODUCTS_INFORM
+PRODUCT_MASTER
+PRODUCT_MS
+PRODUCT_ORDERS
+QUERY_MASTER
+SAMPLEDATA
+STAFF_MASTER
+STUD
+
+TABLE_NAME
+------------------------------
+STUDENT
+STUDENT1
+STUDENT2
+STUDENTS
+STUDENTS_1
+STUDENTS_TP
+STUDENTS_TS
+STUDENT_COURSE_ENROLLMENT
+STUDENT_MARKS
+STUDENT_MASTER
+TGT_AMERICAS
+
+TABLE_NAME
+------------------------------
+TGT_EMPLOYEES
+TGT_EUROPE
+TGT_REG_CN_LOC_DPT
+TRAINEE
+TRANSACTION
+TRANSACTIONS
+USER_TRAINEE
+
+73 rows selected.
+
+SQL> insert into sampledata values(121,'amit',30000,17-Mar-92);
+insert into sampledata values(121,'amit',30000,17-Mar-92)
+                                                  *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into sampledata values(121,'amit',30000,'17-Mar-92');
+
+1 row created.
+
+SQL> SAVEPOINT A;
+
+Savepoint created.
+
+SQL> insert into sampledata values(122,'ajay',20000,'15-Mar-92');
+
+1 row created.
+
+SQL> SAVEPOINT B;
+
+Savepoint created.
+
+SQL> insert into sampledata values(123,'abha',25000,'25-Feb-90');
+
+1 row created.
+
+SQL> SAVEPOINT C;
+
+Savepoint created.
+
+SQL> ROLLBACK TO B;
+
+Rollback complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from sampledata;
+
+       EID ENAME                      ESAL BDATE
+---------- -------------------- ---------- ---------
+       121 amit                      30000 17-MAR-92
+       122 ajay                      20000 15-MAR-92
+
+SQL> insert into sampledata values(123,'abha',25000,'25-Feb-90');
+
+1 row created.
+
+SQL> SAVEPOINT C;
+
+Savepoint created.
+
+SQL> select * from sampledata;
+
+       EID ENAME                      ESAL BDATE
+---------- -------------------- ---------- ---------
+       121 amit                      30000 17-MAR-92
+       122 ajay                      20000 15-MAR-92
+       123 abha                      25000 25-FEB-90
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from sampledata;
+
+       EID ENAME                      ESAL BDATE
+---------- -------------------- ---------- ---------
+       121 amit                      30000 17-MAR-92
+       122 ajay                      20000 15-MAR-92
+       123 abha                      25000 25-FEB-90
+
+SQL> ROLLBACK TO B;
+ROLLBACK TO B
+*
+ERROR at line 1:
+ORA-01086: savepoint 'B' never established in this session or is invalid
+
+
+SQL> delete from sampledata where eid=123;
+
+1 row deleted.
+
+SQL> SAVEPOINT D;
+
+Savepoint created.
+
+SQL> select * from sampledata;
+
+       EID ENAME                      ESAL BDATE
+---------- -------------------- ---------- ---------
+       121 amit                      30000 17-MAR-92
+       122 ajay                      20000 15-MAR-92
+
+SQL> ROLLBACK TO C;
+ROLLBACK TO C
+*
+ERROR at line 1:
+ORA-01086: savepoint 'C' never established in this session or is invalid
+
+
+SQL> ROLLBACK TO D;
+
+Rollback complete.
+
+SQL> select * from sampledata;
+
+       EID ENAME                      ESAL BDATE
+---------- -------------------- ---------- ---------
+       121 amit                      30000 17-MAR-92
+       122 ajay                      20000 15-MAR-92
+
+SQL>

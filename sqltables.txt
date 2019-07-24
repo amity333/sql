@@ -1,0 +1,119 @@
+
+SQL> CREATE TABLE EMP(EmpNo NUMBER PRIMARY KEY,Ename VARCHAR(10),Job VARCHAR(9),
+mgr NUMBER,HireDate DATE,EmpSal NUMBER(6,2),Comm NUMBER(6,2),DeptNo NUMBER);
+CREATE TABLE EMP(EmpNo NUMBER PRIMARY KEY,Ename VARCHAR(10),Job VARCHAR(9),mgr N
+UMBER,HireDate DATE,EmpSal NUMBER(6,2),Comm NUMBER(6,2),DeptNo NUMBER)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> CREATE TABLE EMP1(EmpNo NUMBER PRIMARY KEY,Ename VARCHAR(10),Job VARCHAR(9)
+,mgr NUMBER,HireDate DATE,EmpSal NUMBER(6,2),Comm NUMBER(6,2),DeptNo NUMBER);
+
+Table created.
+
+SQL> CREATE TABLE DESIGNATION(DesignCode NUMBER PRIMARY KEY,DesignName VARCHAR(2
+0));
+
+Table created.
+
+SQL> CREATE TABLE DEPARTMENT1(DeptCode NUMBER PRIMARY KEY,DeptName VARCHAR(50));
+
+
+Table created.
+
+SQL> CREATE TABLE STUDENT2(StudebtCode NUMBER PRIMARY KEY ,StudentName VARCHAR(5
+0) NOT NULL,DeptCode NUMBER,StudentBdate DATE,StudentAddr VARCHAR)
+  2  ;
+CREATE TABLE STUDENT2(StudebtCode NUMBER PRIMARY KEY ,StudentName VARCHAR(50) NO
+T NULL,DeptCode NUMBER,StudentBdate DATE,StudentAddr VARCHAR)
+
+                                                            *
+ERROR at line 1:
+ORA-00906: missing left parenthesis
+
+
+SQL> CREATE TABLE STUDENT2(StudebtCode NUMBER PRIMARY KEY ,StudentName VARCHAR(5
+0) NOT NULL,DeptCode NUMBER,StudentBdate DATE,StudentAddr VARCHAR(40));
+CREATE TABLE STUDENT2(StudebtCode NUMBER PRIMARY KEY ,StudentName VARCHAR(50) NO
+T NULL,DeptCode NUMBER,StudentBdate DATE,StudentAddr VARCHAR(40))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> CREATE TABLE STUDENT3(StudebtCode NUMBER PRIMARY KEY ,StudentName VARCHAR(5
+0) NOT NULL,DeptCode NUMBER,StudentBdate DATE,StudentAddr VARCHAR(40));
+
+Table created.
+
+SQL> CREATE TABLE STU_MARKS(StudentCode NUMBER,StudentYear NUMBER NOT NULL,Subje
+ct1 NUMBER.Subject2 NUMBER,Subject3 NUMBER);
+CREATE TABLE STU_MARKS(StudentCode NUMBER,StudentYear NUMBER NOT NULL,Subject1 N
+UMBER.Subject2 NUMBER,Subject3 NUMBER)
+
+     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> CREATE TABLE STU_MARKS(StudentCode NUMBER,StudentYear NUMBER NOT NULL,Subje
+ct1 NUMBER,Subject2 NUMBER,Subject3 NUMBER);
+
+Table created.
+
+SQL> CREATE TABLE STAFF(StaffCode NUMBER NOT NULL,StaffName VARCHAR(50),DesignCo
+de NUMBER,DeptCode NUMBER,HireDate DATE);
+
+Table created.
+
+SQL> DROP TABLE STAFF;
+
+Table dropped.
+
+SQL> CREATE TABLE STAFF(StaffCode NUMBER NOT NULL,StaffName VARCHAR(50),DesignCo
+de NUMBER,DeptCode NUMBER,HireDate DATE,Staffbdate DATE,StaffAddr VARCHAR(40),Mg
+rCode NUMBER,StaffSal NUMBER(6,2));
+
+Table created.
+
+SQL> CREATE TABLE BOOK(BookCode NUMBER NOT NULL,BookName VARCHAR(50) NOT NULL);
+CREATE TABLE BOOK(BookCode NUMBER NOT NULL,BookName VARCHAR(50) NOT NULL)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> CREATE TABLE BOOK1(BookCode NUMBER NOT NULL,BookName VARCHAR(50) NOT NULL);
+
+
+Table created.
+
+SQL> DROP TABLE BOOK1;
+
+Table dropped.
+
+SQL> CREATE TABLE BOOK1(BookCode NUMBER NOT NULL,BookName VARCHAR(50) NOT NULL,B
+ookPubYear NUMBER,BookPubauthor VARCHAR(50) NOT NULL);
+
+Table created.
+
+SQL> CREATE TABLE BOOK_TRANSACTIONS(BookCode NUMBER,StudentCode NUMBER,StaffCode
+ NUMBER,BookIssueDate DATE NOT NULL,BookExpectedReturnDate DATE NOT NULL,BookAct
+ualReturnDate DATE);
+CREATE TABLE BOOK_TRANSACTIONS(BookCode NUMBER,StudentCode NUMBER,StaffCode NUMB
+ER,BookIssueDate DATE NOT NULL,BookExpectedReturnDate DATE NOT NULL,BookActualRe
+turnDate DATE)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> CREATE TABLE BOOK_TRANSACTIONS1(BookCode NUMBER,StudentCode NUMBER,StaffCod
+e NUMBER,BookIssueDate DATE NOT NULL,BookExpectedReturnDate DATE NOT NULL,BookAc
+tualReturnDate DATE);
+
+Table created.
+
+SQL>
